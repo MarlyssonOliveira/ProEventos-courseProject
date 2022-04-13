@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace ProEventos.API.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
@@ -125,4 +126,5 @@ namespace ProEventos.API.Controllers
             }
         }
     }
+ 
 }
