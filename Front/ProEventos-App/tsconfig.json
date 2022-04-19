@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks":false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -22,10 +23,13 @@
       "es2018",
       "dom"
     ],
-    "paths":{
-      "@app/*": ["src/app"],
-      "@environments/*":["src/environments/*"]
-    }
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],"@environments/*": [
+        "src/environments/*"
+      ]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

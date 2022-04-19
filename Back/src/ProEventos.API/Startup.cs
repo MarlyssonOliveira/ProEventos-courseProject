@@ -1,21 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ProEventos.Application.Interfaces;
 using ProEventos.Application.Services;
 using ProEventos.Persistence;
 using ProEventos.Persistence.Interface;
+
+using AutoMapper;
+using System;
+using ProEventos.Persistence.Interfaces;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ProEventos.API
 {
@@ -40,9 +40,13 @@ namespace ProEventos.API
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<IEventosService, EventoService>();
+            services.AddScoped<ILoteService, LoteService>();
             services.AddScoped<IGeralPersist, GeralPersistence>();
             services.AddScoped<IEventoPersist, EventoPersistence>();
+            services.AddScoped<ILotePersist, LotePersistence>();
 
 
 
@@ -73,6 +77,13 @@ namespace ProEventos.API
                                 .AllowAnyMethod()
                                 .AllowAnyOrigin()
             );
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+                RequestPath = new PathString("/Resources")
+
+            });
 
             app.UseEndpoints(endpoints =>
             {
