@@ -45,7 +45,7 @@ namespace ProEventos.Application
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescription = new SecurityTokenDescriptor
             {

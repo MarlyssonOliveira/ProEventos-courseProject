@@ -13,7 +13,6 @@ namespace ProEventos.Application.Dtos
         [Required]
         public string Local { get; set; }
 
-        [Required]
         public string DataEvento { get; set; }
 
         [Required,
@@ -35,6 +34,9 @@ namespace ProEventos.Application.Dtos
         [Display(Name ="E-mail")]
         [EmailAddress(ErrorMessage = "É necessario ser um {0} válido")]
         public string Email { get; set; }
+
+        public int UserId { get; set; }
+        public UserDto UserDto { get; set; }
 
         public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
         public IEnumerable<PalestranteDto> PalestrantesEventos { get; set; }
