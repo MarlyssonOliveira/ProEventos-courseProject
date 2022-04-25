@@ -10,12 +10,11 @@ import { environment } from '@environments/environment';
 )
 export class EventoService {
   baseURL = environment.apiURL + 'api/eventos';
-  tokenHeader = new HttpHeaders({'Authorization': 'Bearer '});
 
   constructor(private http: HttpClient) { }
 
   public getEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseURL, {headers: this.tokenHeader} ).pipe(take(1));
+    return this.http.get<Evento[]>(this.baseURL).pipe(take(1));
   }
 
   public getEventosByTema(tema: string): Observable<Evento[]> {
